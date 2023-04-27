@@ -1,0 +1,50 @@
+﻿@model ProjetoVeterinaria.Models.clAnimal
+
+@{
+    ViewBag.Title = "Editar Animal";
+}
+
+<h2>Edição de Animais</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.codAnimal, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.codAnimal, new { htmlAttributes = new { @class = "form-control", @readOnly = "readOnly" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.nomeAnimal, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.nomeAnimal, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.nomeAnimal, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <br />
+    @Html.DropDownList("racas", "Escolha a Raça")
+    <br />
+    <br />
+    @Html.DropDownList("clientes", "Escolha o Cliente")
+    <br />
+    <br />
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Alterar" class="btn btn-primary" />
+        </div>
+    </div>
+    <br />
+</div>
+}
+
+<div>
+    @Html.ActionLink("Lista de Cliente", "ListarCliente", "Cliente")
+</div>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ProjetoVeterinaria.Models.clCliente>
+
+@{
+    ViewBag.Title = "Listar Cliente";
+}
+
+<h2>Listar Cliente</h2>
+
+<p>
+    @Html.ActionLink("Novo", "CadCliente", "Cliente")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.codCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nomeCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailCliente)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.codCliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nomeCliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telCliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailCliente)
+            </td>
+            <td>
+                @Html.ActionLink("Atualizar", "EditarCliente", new { id = item.codCliente }) |
+                @Html.ActionLink("Excluir", "ExcluirCliente", new { id = item.codCliente }, new { onclick = " return confirm('Deseja realmente excluir?');" })
+            </td>
+        </tr>
+    }
+
+</table>

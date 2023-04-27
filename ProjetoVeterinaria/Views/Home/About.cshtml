@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Sobre";
+}
+
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Informações de Usuário</p>
+
+Seja bem-vindo @ViewBag.nome
+<br />
+Você é um usuário do tipo @ViewBag.tipo
+<br />
+@if (Session["tipoLogado1"] != null)
+{
+    <b>
+        @Html.ActionLink("Cadastro de login", "cadLogin", "Home")
+    </b>
+}
+
+
+@if (Session["tipoLogado2"] != null)
+{
+    <i>
+        @Html.ActionLink("Cadastro de login", "cadLogin", "Home")
+    </i>
+}
+
+

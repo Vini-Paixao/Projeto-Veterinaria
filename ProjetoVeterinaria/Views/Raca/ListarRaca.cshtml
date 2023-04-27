@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ProjetoVeterinaria.Models.clRaca>
+
+@{
+    ViewBag.Title = "Listar Raça";
+}
+
+<h2>Lista de Raças</h2>
+
+<p>
+    @Html.ActionLink("Novo", "CadRaca", "Raca")
+</p>
+<table class="table text-center">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.codRaca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nomeRaca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tipo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.codRaca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nomeRaca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipo)
+            </td>
+        </tr>
+    }
+
+</table>

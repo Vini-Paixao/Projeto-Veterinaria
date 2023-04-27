@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ProjetoVeterinaria.Models.clAnimal>
+
+@{
+    ViewBag.Title = "Listar Animal";
+}
+
+<h2>Lista de Animais</h2>
+
+<p>
+    @Html.ActionLink("Novo", "CadAnimal", "Animal")
+</p>
+<table class="table text-center">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.codAnimal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nomeAnimal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nomeRaca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nomeCliente)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.codAnimal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nomeAnimal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nomeRaca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nomeCliente)
+            </td>
+            <td>
+                @Html.ActionLink("Atualizar", "EditarAnimal", new { id = item.codAnimal }) |
+                @Html.ActionLink("Excluir", "ExcluirAnimal", new { id = item.codAnimal }, new { onclick = " return confirm('Deseja realmente excluir?');" })
+            </td>
+        </tr>
+    }
+
+</table>

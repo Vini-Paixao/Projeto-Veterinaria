@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Usuário";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <script src="https://kit.fontawesome.com/9040baff3f.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 50px;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+
+        i {
+            font-size: 50px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>@ViewBag.Title <i class="fa-solid fa-user-gear fa-lg"></i></h2>
+    <h3>@ViewBag.Message</h3>
+    <hr />
+    <p>Informações de Usuário.</p>
+    <p>Você é um usuário Administrador do sistema.</p>
+    <p>Seja bem-vindo @ViewBag.nome</p>
+</body>
+</html>

@@ -1,0 +1,157 @@
+﻿@model ProjetoVeterinaria.Models.modelLogin
+
+@{
+    ViewBag.Title = "Início";
+    Layout = "";
+}
+
+@ViewBag.confCadastro
+@ViewBag.msgLogar
+
+<head>
+    <script src="https://kit.fontawesome.com/9040baff3f.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+        background-color: #222;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    form {
+        width: 350px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    fieldset {
+        border: none;
+        padding: 30px;
+    }
+
+    h2 {
+        margin-bottom: 30px;
+        color: #3a3a3a;
+        font-size: 26px;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width: 80%;
+        padding: 10px;
+        border-radius: 50px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        color: #555;
+        box-sizing: border-box;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+        outline: none;
+        border-color: #1abc9c;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .input-group-addon {
+        background-color: #eee;
+        border-radius: 50px;
+        padding: 10px 15px;
+        color: #666;
+    }
+
+    .form-control {
+        height: 50px;
+        border-radius: 0px 5px 5px 0px;
+        border: none;
+        background-color: #f2f2f2;
+        padding: 0px 15px;
+        color: #666;
+        font-size: 16px;
+    }
+
+    .btn-primary {
+        background-color: #1abc9c;
+        border: none;
+        height: 50px;
+        border-radius: 500px;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 600;
+        transition: 0.3s;
+        width: 100%;
+    }
+    .btn-primary:hover {
+        background-color: #fff;
+        border: 3px solid #1abc9c;
+        border-color: #1abc9c;
+        color: #1abc9c;
+        transform: scale(1.05);
+        cursor: pointer;
+    }
+
+</style>
+<div class="container">
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { style = "width: 350px;" }))
+    {
+        <fieldset>
+            <h2 style="text-align:center">CLÍNICA VETERINÁRIA</h2>
+            <br />
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fas fa-envelope"></i></span>
+                    @Html.EditorFor(x => x.usuario, new
+                       {
+                           htmlAttributes = new
+                           {
+                               id = "txtUsuario",
+                               name = "txtUsuario",
+                               type = "text",
+                               placeholder = "Digite o usuário",
+                               required = "required",
+                               maxlength = "30"
+                           }
+                       })
+                    @Html.ValidationMessageFor(x => x.usuario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fas fa-lock"></i></span>
+                    @Html.EditorFor(x => x.senha, new
+                       {
+                           htmlAttributes = new
+                           {
+                               id = "txtSenha",
+                               name = "txtSenha",
+                               type = "password",
+                               placeholder = "Digite sua senha",
+                               required = "required",
+                               maxlength = "10"
+                           }
+                       })
+                    @Html.ValidationMessageFor(x => x.senha, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div style="text-align:center">
+                <input type="submit" class="btn btn-primary" value="ENTRAR" />
+            </div>
+        </fieldset>
+    }
+</div>

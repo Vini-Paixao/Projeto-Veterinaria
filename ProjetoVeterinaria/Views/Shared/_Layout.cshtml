@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Clínica Veterinária</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="https://kit.fontawesome.com/9040baff3f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            <h2 class="navbar-brand" style="padding:0; margin:0 5px 0 0">Bem Vindo! @Session["usuarioLogado"]</h2>
+            @if (Session["tipoLogado2"] != null)
+            {
+                <a class="nav-brand" href="@Url.Action("UsuarioAdmin", "Home")" style="margin:0 5px 0 0; padding: 0;"> <i class="fa-regular fa-circle-user fa-lg" style="color: #ffffff; margin-left: 5px"></i></a>
+            }
+            else
+            {
+        <a class="nav-brand" href="@Url.Action("UsuarioComum", "Home")" style="margin:0 10px 0 0; padding: 0;"> <i class="fa-regular fa-circle-user fa-lg" style="color: #ffffff; margin-left: 5px"></i></a>
+            }
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1" style="padding-right: 0px">
+                    <li style="color:white;padding-top:8px"> | </li>
+                    <li>@Html.ActionLink("Perfil", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Consultar Animal", "ConsAnimal", "Animal", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Consultar Veterinário", "ConsVeterinario", "Veterinario", new { area = "" }, new { @class = "nav-link" })</li>
+
+
+                    @if (Session["tipoLogado2"] != null)
+                    {
+                        <li style="color:white;padding-top:8px"> | </li>
+                        <li>@Html.ActionLink("Cliente", "CadCliente", "Cliente", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Animal", "CadAnimal", "Animal", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Veterinário", "CadVeterinario", "Veterinario", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Atendimento", "CadAtendimento", "Atendimento", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Raça", "CadRaca", "Raca", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Tipo", "CadTipo", "Tipo", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                </ul>
+                <ul class="navbar-nav flex-grow-1">
+                    <li style="color:white;padding-right:10px;"> | </li>
+                    <li style="color: white;">
+                        <a class="nav-link" href="@Url.Action("Logout", "Home")" style="margin-left: 0px; padding: 0; color: #ffffff;">Logout  <i class="fa-solid fa-arrow-right-from-bracket fa-lg" style="color: #ffffff;"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Clínica Veterinária</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

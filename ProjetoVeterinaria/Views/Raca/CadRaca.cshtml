@@ -1,0 +1,39 @@
+﻿@model ProjetoVeterinaria.Models.clRaca
+
+@{
+    ViewBag.Title = "Cadastrar Raça";
+}
+
+<h2>Cadastro da Raça</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.nomeRaca, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.nomeRaca, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.nomeRaca, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    @Html.DropDownList("tipos", "Escolha o Tipo")
+    <br />
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-primary">Cadastrar <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <br />
+</div>
+}
+
+<div>
+    @Html.ActionLink("Lista de Raça", "ListarRaca", "Raca")
+</div>
