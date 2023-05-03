@@ -155,6 +155,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AnimalController.cs" />
+    <Compile Include="Controllers\AtendimentoController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RacaController.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Controllers\VeterinarioController.cs" />
     <Compile Include="Dados\acoesLogin.cs" />
     <Compile Include="Dados\clAnimalAcoes.cs" />
+    <Compile Include="Dados\clAtendimentoAcoes.cs" />
     <Compile Include="Dados\clClienteAcoes.cs" />
     <Compile Include="Dados\clRacaAcoes.cs" />
     <Compile Include="Dados\clTipoAcoes.cs" />
@@ -293,6 +295,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Atendimento\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
