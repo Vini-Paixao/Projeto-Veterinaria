@@ -2,6 +2,7 @@ drop database dbVeterinario;
 create database dbVeterinario;
 use dbVeterinario;
 
+
 create table tblLogin(
 usuario varchar(50) primary key,
 senha varchar(10),
@@ -52,7 +53,7 @@ codAnimal int references tblAnimal(codAnimal)
 /************************************************************************************************************/
 
 insert into tblLogin values 
-("Marcus", "marcus123", 2), ("Pedro", "pedro123", 1);
+("Pedro", "pedro123", 1), ("Marcus", "marcus123", 2);
 
 /************************************************************************************************************/
 
@@ -70,13 +71,6 @@ begin
 		values(_nomeCliente, _telCliente, _emailCliente);
 	commit;
 		rollback;
-end $$
-
--- Procedure consultar cliente por código
-delimiter $$
-create procedure pcd_selectCliente_porCod(_codCliente int)
-begin
-	select * from tblCliente where  codCliente = _codCliente;
 end $$
 
 -- Procedure consultar cliente
@@ -128,10 +122,11 @@ end $$
 
 -- Procedure consultar veterinario por código 
 delimiter $$
-create procedure pcd_selectVeterinario_porCod(_codVeterinario int)
-begin
-	select * from tblVeterinario where  codVeterinario = _codVeterinario;
-end $$
+
+CREATE PROCEDURE pcd_selectVeterinario_porNome(IN nomeVeterinario VARCHAR(50))
+BEGIN
+	SELECT * FROM tblVeterinario WHERE nomeVeterinario LIKE CONCAT('%', nomeVeterinario, '%');
+END $$
 
 -- Procedure consultar veterinario 
 delimiter $$
@@ -178,13 +173,6 @@ begin
 		rollback;
 end $$
 
--- Procedure consultar tipo por código 
-delimiter $$
-create procedure pcd_selectTipo_porCod(_codTipo int)
-begin
-	select * from tblTipo where codTipo = _codTipo;
-end $$
-
 -- Procedure consultar tipo 
 delimiter $$
 create procedure pcd_selectTipo()
@@ -226,18 +214,6 @@ begin
 		values(_nomeRaca, _codTipo);
 	commit;
 		rollback;
-end $$
-
--- Procedure consultar raca por código 
-delimiter $$
-create procedure pcd_selectRaca_porCod(_codRaca int)
-begin
-	select 
-	 t1.codRaca,
-	 t1.nomeRaca, 
-	 t2.tipo from tblRaca as t1 
-	 INNER JOIN tblTipo as t2 ON t1.codTipo = t2.codTipo
-	 where codRaca = _codRaca;
 end $$
 
 -- Procedure consultar raca 
@@ -292,16 +268,16 @@ end $$
 
 -- Procedure consultar animal por código 
 delimiter $$
-create procedure pcd_selectAnimal_porCod(_codAnimal int)
+create procedure pcd_selectAnimal_porNome(_nomeAnimal VARCHAR(50))
 begin
 	select 
-	 t1.codAnimal,
-	 t1.nomeAnimal, 
-	 t2.nomeRaca,
-	 t3.nomeCliente from tblAnimal as t1 
-	 INNER JOIN tblRaca as t2 ON t1.codRaca = t2.codRaca
-	 INNER JOIN tblCliente as t3 ON t1.codCliente = t3.codCliente
-	 where codAnimal = _codAnimal;
+		t1.codAnimal,
+		t1.nomeAnimal, 
+		t2.nomeRaca,
+		t3.nomeCliente from tblAnimal as t1 
+		INNER JOIN tblRaca as t2 ON t1.codRaca = t2.codRaca
+		INNER JOIN tblCliente as t3 ON t1.codCliente = t3.codCliente
+	 where nomeAnimal like concat('%', _nomeAnimal, '%');
 end $$
 
 -- Procedure consultar animal 
@@ -309,12 +285,12 @@ delimiter $$
 create procedure pcd_selectAnimal()
 begin
 	select 
-	 t1.codAnimal,
-	 t1.nomeAnimal, 
-	 t2.nomeRaca,
-	 t3.nomeCliente from tblAnimal as t1 
-	 INNER JOIN tblRaca as t2 ON t1.codRaca = t2.codRaca
-	 INNER JOIN tblCliente as t3 ON t1.codCliente = t3.codCliente;
+		t1.codAnimal,
+        t1.nomeAnimal, 
+        t2.nomeRaca,
+        t3.nomeCliente from tblAnimal as t1 
+        INNER JOIN tblRaca as t2 ON t1.codRaca = t2.codRaca
+        INNER JOIN tblCliente as t3 ON t1.codCliente = t3.codCliente;
 end $$
 
 -- Procedure alterar animal 
@@ -363,14 +339,31 @@ end $$
 delimiter $$
 create procedure pcd_selectAtendimento_porCod(_codAtendimento int)
 begin
-	select * from tblAtendimento where codAtendimento = _codAtendimento;
+	select 
+		t1.codAtendimento,
+		t1.dataAtendimento, 
+		t1.horaAtendimento, 
+		t1.statusAtendimento, 
+		t2.nomeVeterinario,
+		t3.nomeAnimal from tblAtendimento as t1 
+		INNER JOIN tblVeterinario as t2 ON t1.codVeterinario = t2.codVeterinario
+		INNER JOIN tblAnimal as t3 ON t1.codAnimal = t3.codAnimal
+	 where codAtendimento = _codAtendimento;
 end $$
 
 -- Procedure consultar atendimento 
 delimiter $$
 create procedure pcd_selectAtendimento()
 begin
-	select * from tblAtendimento;
+	select 
+		t1.codAtendimento,
+		t1.dataAtendimento, 
+		t1.horaAtendimento, 
+		t1.statusAtendimento, 
+		t2.nomeVeterinario,
+		t3.nomeAnimal from tblAtendimento as t1 
+		INNER JOIN tblVeterinario as t2 ON t1.codVeterinario = t2.codVeterinario
+		INNER JOIN tblAnimal as t3 ON t1.codAnimal = t3.codAnimal;
 end $$
 
 -- Procedure alterar atendimento 
@@ -409,8 +402,6 @@ call pcd_insertCliente("Bruno Almeida", "(21) 99876-2345", "brunoalmeida@email.c
 call pcd_insertCliente("Carla Oliveira", "(51) 98765-3456", "carlaoliveira@email.com");
 call pcd_insertCliente("Daniel Santos", "(31) 99876-4567", "danielsantos@email.com");
 
--- Chamada da Procedure consultar cliente por código
-call pcd_selectCliente_porCod(3);
 
 -- Chamada da Procedure consultar cliente 
 call pcd_selectCliente();
@@ -430,7 +421,7 @@ call pcd_insertVeterinario("Camila Souza", "(51) 98765-6543", "camilasouza.vet@e
 call pcd_insertVeterinario("Daniel Oliveira", "(31) 99876-5432", "danieloliveira.vet@email.com");
 
 -- Chamada da Procedure consultar veterinario por código 
-call pcd_selectVeterinario_porCod(3);
+call pcd_selectVeterinario_porNome("ana");
 
 -- Chamada da Procedure consultar veterinario 
 call pcd_selectVeterinario();
@@ -449,9 +440,6 @@ call pcd_insertTipo("Gato");
 call pcd_insertTipo("Pássaro");
 call pcd_insertTipo("Hamster");
 
--- Chamada da Procedure consultar tipo por código 
-call pcd_selectTipo_porCod(1);
-
 -- Chamada da Procedure consultar tipo 
 call pcd_selectTipo();
 	
@@ -468,9 +456,6 @@ call pcd_insertRaca("Pug", 1);
 call pcd_insertRaca("Siamês", 2);
 call pcd_insertRaca("Papagaio", 3);
 call pcd_insertRaca("Sírio ", 4);
-
--- Chamada da Procedure consultar raca por código 
-call pcd_selectRaca_porCod(1);
 
 -- Chamada da Procedure consultar raca 
 call pcd_selectRaca();
@@ -490,7 +475,7 @@ call pcd_insertAnimal("Charlie", 3, 3);
 call pcd_insertAnimal("Simon ", 4, 4);
 
 -- Chamada da Procedure consultar animal por código 
-call pcd_selectAnimal_porCod(1);
+call pcd_selectAnimal_porNome("nu");
 
 -- Chamada da Procedure consultar animal 
 call pcd_selectAnimal();
@@ -509,14 +494,11 @@ call pcd_insertAtendimento("23/04/2023", "14:30", "Atendido", 2, 3);
 call pcd_insertAtendimento("24/04/2023", "09:15", "Agendado", 3, 4);
 call pcd_insertAtendimento("22/04/2023", "11:45", "Atendido", 4, 1);
 
--- Chamada da Procedure consultar atendimento por código 
-call pcd_selectAtendimento_porCod(1);
-
 -- Chamada da Procedure consultar atendimento 
 call pcd_selectAtendimento();
 	
 -- Chamada da Procedure alterar atendimento 
-call pcd_updateAtendimento(4, "26/04/2023", "16:00", "Agendado", 1, 3);
+call pcd_updateAtendimento(5, "26/04/2023", "13:30", "Agendado", 1, 3);
 
 -- Chamada da Procedure apagar atendimento
 -- call pcd_deleteAtendimento(3);

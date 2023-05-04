@@ -11,6 +11,10 @@ namespace ProjetoVeterinaria.Controllers
 {
     public class HomeController : Controller
     {
+        clVeterinarioAcoes acVeterinarioAcoes = new clVeterinarioAcoes();
+        clVeterinario modVeterinario = new clVeterinario();
+
+
         acoesLogin acLg = new acoesLogin(); 
         public ActionResult Index()
         {
@@ -146,5 +150,25 @@ namespace ProjetoVeterinaria.Controllers
             ViewBag.message = "Você não tem acesso a essa página";
             return View();
         }
+
+        public ActionResult BuscaVeterinario()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult BuscaVeterinario(string nome)
+        {
+            var listVeterinarios = acVeterinarioAcoes.buscarVeterinarioPorNome(nome);
+            ViewBag.ListaVeterinarios = listVeterinarios;
+            return RedirectToAction(nameof(ListarVeterinarioNome));
+        }
+
+        public ActionResult ListarVeterinarioNome()
+        {
+            return View();
+        }
+
+
     }
 }

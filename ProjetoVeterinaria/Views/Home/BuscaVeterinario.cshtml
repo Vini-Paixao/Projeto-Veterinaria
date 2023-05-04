@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Buscar Veterinário";
+}
+
+<h2 class="text-center">CONSULTAR VETERINÁRIO <i class="fa-solid fa-shield-cat"></i></h2>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal text-center" }))
+{
+    @Html.AntiForgeryToken()
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <div class="col-md-12">
+            <h5 class="control-label">Digite o nome do Veterinário para buscar:</h5>
+        </div>
+        <br />
+        <div class="offset-5 col-md-2">
+            <input type="text" class="form-control" name="nome" />
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-12">
+            <button type="submit" class="btn btn-primary" type="submit"><b>Buscar</b> <i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i></button>
+        </div>
+    </div>
+    <br />
+}

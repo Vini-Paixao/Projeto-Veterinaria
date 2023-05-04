@@ -292,10 +292,14 @@
     <Content Include="Views\Animal\CadAnimal.cshtml" />
     <Content Include="Views\Animal\ListarAnimal.cshtml" />
     <Content Include="Views\Animal\EditarAnimal.cshtml" />
+    <Content Include="Views\Atendimento\CadAtendimento.cshtml" />
+    <Content Include="Views\Atendimento\EditarAtendimento.cshtml" />
+    <Content Include="Views\Atendimento\ListarAtendimento.cshtml" />
+    <Content Include="Views\Home\BuscaVeterinario.cshtml" />
+    <Content Include="Views\Home\ListarVeterinarioNome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Atendimento\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

@@ -26,7 +26,7 @@ namespace ProjetoVeterinaria.Dados
 
         public List<clVeterinario> buscarVeterinario()
         {
-            List<clVeterinario> cliList = new List<clVeterinario>();
+            List<clVeterinario> VetList = new List<clVeterinario>();
             MySqlCommand cmd = new MySqlCommand("call pcd_selectVeterinario()", con.conectarBD());
 
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -37,7 +37,7 @@ namespace ProjetoVeterinaria.Dados
 
             foreach (DataRow dr in dt.Rows)
             {
-                cliList.Add(
+                VetList.Add(
                     new clVeterinario
                     {
                         codVeterinario = Convert.ToInt32(dr["codVeterinario"]),
@@ -47,7 +47,40 @@ namespace ProjetoVeterinaria.Dados
                     }
                     );
             }
-            return cliList;
+            return VetList;
+        }
+
+        public List<clVeterinario> buscarVeterinarioPorNome(string nome)
+        {
+            if (string.IsNullOrEmpty(nome))
+            {
+                return new List<clVeterinario>();
+            }
+            List<clVeterinario> VetListNome = new List<clVeterinario>();
+            MySqlCommand cmd = new MySqlCommand("call pcd_selectVeterinario(@nomeVeterinario)", con.conectarBD());
+
+            cmd.Parameters.Equals(nome);
+
+
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+            da.Fill(dt);
+            con.desconectarBD();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                VetListNome.Add(
+                    new clVeterinario
+                    {
+                        codVeterinario = Convert.ToInt32(dr["codVeterinario"]),
+                        nomeVeterinario = Convert.ToString(dr["nomeVeterinario"]),
+                        telVeterinario = Convert.ToString(dr["telVeterinario"]),
+                        EmailVeterinario = Convert.ToString(dr["EmailVeterinario"])
+                    }
+                    );
+            }
+            return VetListNome;
         }
 
         public void atualizarVeterinario(clVeterinario cm)
