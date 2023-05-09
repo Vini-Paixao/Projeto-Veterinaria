@@ -295,8 +295,7 @@
     <Content Include="Views\Atendimento\CadAtendimento.cshtml" />
     <Content Include="Views\Atendimento\EditarAtendimento.cshtml" />
     <Content Include="Views\Atendimento\ListarAtendimento.cshtml" />
-    <Content Include="Views\Home\BuscaVeterinario.cshtml" />
-    <Content Include="Views\Home\ListarVeterinarioNome.cshtml" />
+    <Content Include="Views\Veterinario\ConsVeterinario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

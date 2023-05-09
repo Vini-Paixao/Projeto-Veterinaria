@@ -151,24 +151,5 @@ namespace ProjetoVeterinaria.Controllers
             return View();
         }
 
-        public ActionResult BuscaVeterinario()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult BuscaVeterinario(string nome)
-        {
-            var listVeterinarios = acVeterinarioAcoes.buscarVeterinarioPorNome(nome);
-            ViewBag.ListaVeterinarios = listVeterinarios;
-            return RedirectToAction(nameof(ListarVeterinarioNome));
-        }
-
-        public ActionResult ListarVeterinarioNome()
-        {
-            return View();
-        }
-
-
     }
 }

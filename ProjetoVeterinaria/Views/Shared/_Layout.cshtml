@@ -24,8 +24,8 @@
                 <ul class="navbar-nav flex-grow-1" style="padding-right: 0px">
                     <li style="color:white;padding-top:8px"> | </li>
                     <li>@Html.ActionLink("Perfil", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Consultar Animal", "BuscaAnimal", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Consultar Veterinário", "BuscaVeterinario", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Consultar Animal", "ConsAnimal", "Animal", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Consultar Veterinário", "ConsVeterinario", "Veterinario", new { area = "" }, new { @class = "nav-link" })</li>
 
 
                     @if (Session["tipoLogado2"] != null)

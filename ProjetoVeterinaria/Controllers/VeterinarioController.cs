@@ -116,5 +116,11 @@ namespace ProjetoVeterinaria.Controllers
                 return RedirectToAction(nameof(ListarVeterinario));
             }
         }
+
+
+        public ActionResult ConsVeterinario()
+        {
+            return View(acVeterinarioAcoes.buscarVeterinario());        
+        }
     }
 }
