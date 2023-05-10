@@ -296,6 +296,7 @@
     <Content Include="Views\Atendimento\EditarAtendimento.cshtml" />
     <Content Include="Views\Atendimento\ListarAtendimento.cshtml" />
     <Content Include="Views\Veterinario\ConsVeterinario.cshtml" />
+    <Content Include="Views\Animal\ConsAnimal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

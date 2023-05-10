@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ProjetoVeterinaria.Models.clAnimal>
+
+@{
+    ViewBag.Title = "Consultar Animal";
+}
+
+<h2>Consultar Animal</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.codAnimal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nomeAnimal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nomeRaca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nomeCliente)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.codAnimal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nomeAnimal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nomeRaca)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nomeCliente)
+        </td>
+    </tr>
+}
+
+</table>

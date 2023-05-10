@@ -184,5 +184,11 @@ namespace ProjetoVeterinaria.Controllers
                 return RedirectToAction(nameof(ListarAnimal));
             }
         }
+
+
+        public ActionResult ConsAnimal()
+        {
+            return View(acAnimalAcoes.buscarAnimal());
+        }
     }
 }
